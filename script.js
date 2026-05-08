@@ -1,72 +1,82 @@
-// Elements
-const output = document.querySelector('#output');
-const cursor = document.querySelector('#cursor');
+const commandInput = document.getElementById('command-input');
+const outputArea = document.getElementById('output');
+const terminal = document.getElementById('terminal');
 
-// Lines to display on load
-const bootLines = [
-  'Initializing system...',
-  'Loading modules...',
-  'Welcome, user.',
-  'Type "help" for a list of commands.',
-];
+// Keep the input focused even if the user clicks elsewhere on the screen
+document.addEventListener('click', () => {
+    commandInput.focus();
+});
 
-// Types a single line character by character
-function typeLine(text, callback) {
-  const line = document.createElement('p');
-  output.appendChild(line);
-  let i = 0;
-  const interval = setInterval(() => {
-    line.textContent += text[i];
-    i++;
-    if (i >= text.length) {
-      clearInterval(interval);
-      if (callback) callback(); // move to next line
-    }
-  }, 40);
-}
-
-// Types all boot lines in sequence
-function runBootSequence(lines, index = 0) {
-  if (index >= lines.length) return;
-  typeLine(lines[index], () => runBootSequence(lines, index + 1));
-}
-const input = document.querySelector('#cmd-input');
-
-// Define your commands here
+// Database of commands and their outputs
 const commands = {
-  help: 'Available commands: help, about, clear',
-  about: 'This is my terminal website.',
-  clear: null, // handled separately
+    'help': `
+        Available commands: <br>
+        <span class="highlight">about</span>    - Learn more about me <br>
+        <span class="highlight">resume</span>   - View my experience and skills <br>
+        <span class="highlight">projects</span> - See what I've built <br>
+        <span class="highlight">contact</span>  - Get my email and social links <br>
+        <span class="highlight">clear</span>    - Clear the terminal screen
+    `,
+    'about': `
+        Howdy! My name is Matias Tupinamba. I'm an engineering student at Texas A&M!
+    `,
+    'resume': `
+        Add link to actual resume later...
+    `,
+    'projects': `
+        Fill out projects here..
+    `,
+    'contact': `
+        Email: tupinambam2006@gmail.com <br>
+        GitHub: github.com/matiastup <br>
+        LinkedIn: linkedin.com/in/matias-tupinamba
+    `
 };
 
-// Start on page load
-runBootSequence(bootLines);
+// Listen for the Enter key
+commandInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        const userInput = commandInput.value.trim().toLowerCase();
+        
+        // Print what the user typed
+        printEcho(commandInput.value);
+        
+        // Process the command
+        processCommand(userInput);
+        
+        // Clear the input field
+        commandInput.value = '';
+        
+        // Scroll to the bottom of the terminal
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+});
 
-// Listen for Enter key
-input.addEventListener('keydown', function (e) {
-  if (e.key === 'Enter') {
-    const cmd = input.value.trim().toLowerCase();
-    input.value = '';
+function printEcho(input) {
+    const echoDiv = document.createElement('div');
+    echoDiv.className = 'command-echo';
+    echoDiv.innerHTML = `<span class="prompt">guest@portfolio:~$</span> ${input}`;
+    outputArea.appendChild(echoDiv);
+}
 
-    // Echo what the user typed
-    const echo = document.createElement('p');
-    echo.textContent = '> ' + cmd;
-    output.appendChild(echo);
+function processCommand(command) {
+    const responseDiv = document.createElement('div');
+    responseDiv.className = 'message';
 
-    // Handle the command
-    if (cmd === 'clear') {
-      output.innerHTML = '';
-    } else if (commands[cmd]) {
-      const response = document.createElement('p');
-      response.textContent = commands[cmd];
-      output.appendChild(response);
+    if (command === '') {
+        return; // Do nothing if they just pressed enter
+    } else if (command === 'clear') {
+        outputArea.innerHTML = '';
+        return;
+    } else if (command === 'resume') {
+        // This line opens the PDF in a new tab
+        window.open('resume.pdf', '_blank');
+        responseDiv.innerHTML = 'Opening resume.pdf in a new tab...';
+    } else if (commands[command]) {
+        responseDiv.innerHTML = commands[command];
     } else {
-      const error = document.createElement('p');
-      error.textContent = 'Command not found: ' + cmd;
-      output.appendChild(error);
+        responseDiv.innerHTML = `Command not found: <span class="highlight">${command}</span>. Type 'help' for a list of commands.`;
     }
 
-    // Auto-scroll to bottom
-    output.scrollTop = output.scrollHeight;
-  }
-});
+    outputArea.appendChild(responseDiv);
+}
