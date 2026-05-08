@@ -1,18 +1,25 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="terminal">
-    <div id="output"></div>
-    <div id="input-line">
-      <span class="prompt">user@site:~$</span>
-      <input id="cmd-input" type="text" autofocus spellcheck="false" />
-      <span id="cursor">█</span>
+    <div id="terminal">
+        <div id="output">
+            <div class="message system">
+                Welcome to my interactive portfolio. <br>
+                Type <span class="highlight">'help'</span> to see a list of available commands.
+            </div>
+        </div>
+        <div id="input-line">
+            <span class="prompt">guest@portfolio:~$ </span>
+            <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
+        </div>
     </div>
-  </div>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
+</html>
