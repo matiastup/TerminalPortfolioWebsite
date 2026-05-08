@@ -1,10 +1,69 @@
-body {
-    font-family: 'Fira Code', monospace;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#cursor {
-  animation: blink 1s step-end infinite;
+body {
+    background-color: #232528;
+    color: #D7CEB2;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
-@keyframes blink {
-  50% { opacity: 0; }
+
+#terminal {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#terminal::-webkit-scrollbar {
+    display: none;
+}
+
+#output {
+    margin-bottom: 10px;
+}
+
+.message {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.command-echo {
+    color: #ffffff; /* User input shows up in white */
+    margin-bottom: 5px;
+}
+
+.prompt {
+    color: #4A7856;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.highlight {
+    color: #FF4000;
+}
+
+/* Input Line Styling */
+#input-line {
+    display: flex;
+    align-items: center;
+}
+
+#command-input {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    flex-grow: 1;
+    outline: none;
 }
