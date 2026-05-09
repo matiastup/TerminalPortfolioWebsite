@@ -5,8 +5,8 @@
 }
 
 body {
-    background-color: #232528;
-    color: #D7CEB2;
+    background-color: #05081C;
+    color: #CDCBDD;
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     height: 100vh;
@@ -38,18 +38,18 @@ body {
 }
 
 .command-echo {
-    color: #ffffff; /* User input shows up in white */
+    color: #CDCBDD;
     margin-bottom: 5px;
 }
 
 .prompt {
-    color: #4A7856;
+    color: #066010;
     font-weight: bold;
     margin-right: 5px;
 }
 
 .highlight {
-    color: #FF4000;
+    color: #FFFD82;
 }
 
 /* Input Line Styling */
@@ -61,7 +61,7 @@ body {
 #command-input {
     background-color: transparent;
     border: none;
-    color: #ffffff;
+    color: #CDCBDD;
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     flex-grow: 1;
