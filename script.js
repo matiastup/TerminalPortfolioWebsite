@@ -20,12 +20,6 @@ const commands = {
     'about': `
         Howdy! My name is Matias Tupinamba. I'm an engineering student at Texas A&M!
     `,
-    'resume': `
-        Add link to actual resume later...
-    `,
-    'projects': `
-        Fill out projects here..
-    `,
     'contact': `
         Email: tupinambam2006@gmail.com <br>
         GitHub: github.com/matiastup <br>
@@ -64,19 +58,69 @@ function processCommand(command) {
     responseDiv.className = 'message';
 
     if (command === '') {
-        return; // Do nothing if they just pressed enter
+        return; 
     } else if (command === 'clear') {
         outputArea.innerHTML = '';
         return;
     } else if (command === 'resume') {
-        // This line opens the PDF in a new tab
         window.open('resume.pdf', '_blank');
         responseDiv.innerHTML = 'Opening resume.pdf in a new tab...';
+    } else if (command === 'projects') {
+        // Build the HTML for the interactive projects menu
+        responseDiv.innerHTML = `
+            Here are my recent projects. Click to expand: <br>
+            
+            <button type="button" class="collapsible">[+] Example Project 1</button>
+            <div class="content">
+                <p>Example Projects Description</p>
+                <img src="https://via.placeholder.com/500x250/0f0f0f/00ff00?text=Weather+App+Screenshot" alt="Example Image">
+                <p><strong>Tech Stack:</strong> Things used..</p>
+                <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style="color: #ffcc00;">View Live</a> | <a target="_blank" href="https://github.com/matiastup" style="color: #ffcc00;">GitHub</a>
+            </div>
+
+            <button type="button" class="collapsible">[+] Example Project 2</button>
+            <div class="content">
+                <p>Example description</p>
+                <img src="https://via.placeholder.com/500x250/0f0f0f/00ff00?text=E-commerce+Screenshot" alt="Example Image">
+                <p><strong>Tech Stack:</strong> Things used..</p>
+                <a target="_blank" href="#" style="color: #ffcc00;">View Live</a> | <a target="_blank" href="https://github.com/matiastup" style="color: #ffcc00;">GitHub</a>
+            </div>
+        `;
+        
+        // Append it to the terminal first so the elements exist on the page
+        outputArea.appendChild(responseDiv);
+
+        // Now, find the buttons we just created and add the click logic
+        const collapsibles = responseDiv.querySelectorAll('.collapsible');
+        collapsibles.forEach(button => {
+            button.addEventListener('click', function() {
+                // Toggle the [+] and [-] text
+                if (this.innerText.startsWith('[+]')) {
+                    this.innerText = this.innerText.replace('[+]', '[-]');
+                } else {
+                    this.innerText = this.innerText.replace('[-]', '[+]');
+                }
+                
+                // Toggle the visibility of the content div right below the button
+                const content = this.nextElementSibling;
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    content.style.display = 'block';
+                }
+
+                // Scroll terminal to bottom to accommodate new content size
+                terminal.scrollTop = terminal.scrollHeight;
+            });
+        });
+        return; // Exit the function early since we already appended the div
+
     } else if (commands[command]) {
         responseDiv.innerHTML = commands[command];
     } else {
         responseDiv.innerHTML = `Command not found: <span class="highlight">${command}</span>. Type 'help' for a list of commands.`;
     }
 
+    // Append standard text responses
     outputArea.appendChild(responseDiv);
 }
