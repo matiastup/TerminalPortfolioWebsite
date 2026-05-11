@@ -49,7 +49,7 @@ commandInput.addEventListener('keydown', function (event) {
 function printEcho(input) {
     const echoDiv = document.createElement('div');
     echoDiv.className = 'command-echo';
-    echoDiv.innerHTML = `<span class="prompt">guest@portfolio:~$</span> ${input}`;
+    echoDiv.innerHTML = `<span class="prompt">user@portfolio:~$</span> ${input}`;
     outputArea.appendChild(echoDiv);
 }
 
