@@ -63,7 +63,7 @@ function processCommand(command) {
         outputArea.innerHTML = '';
         return;
     } else if (command === 'resume') {
-        window.open('resume.pdf', '_blank');
+        window.open('resources/resume.pdf', '_blank');
         responseDiv.innerHTML = 'Opening resume.pdf in a new tab...';
     } else if (command === 'projects') {
         // Build the HTML for the interactive projects menu
@@ -78,12 +78,18 @@ function processCommand(command) {
                 <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style="color: #ffcc00;">View Live</a> | <a target="_blank" href="https://github.com/matiastup" style="color: #ffcc00;">GitHub</a>
             </div>
 
-            <button type="button" class="collapsible">[+] Example Project 2</button>
+            <button type="button" class="collapsible">[+] Mini Haptic Steering Wheel Controller</button>
             <div class="content">
-                <p>Example description</p>
-                <img src="https://via.placeholder.com/500x250/0f0f0f/00ff00?text=E-commerce+Screenshot" alt="Example Image">
-                <p><strong>Tech Stack:</strong> Things used..</p>
-                <a target="_blank" href="#" style="color: #ffcc00;">View Live</a> | <a target="_blank" href="https://github.com/matiastup" style="color: #ffcc00;">GitHub</a>
+                <ul>
+                    <li>Winner of best beginner hardware hack @ TAMUHACK2026</li>
+                    <li>Built custom force-feedback system using Moteus BLDC controller, transforming live data into physical feedback</li>
+                    <li>Implemented cross device communication between racing simulator, steering controller, and force feedback device</li>
+                    <li>Utilized Fusion360 to construct the controller’s base and housing to ensure compliance within size constraints</li>
+                </ul>
+                <img src="resources/wheelPic1.jpg" alt="Wheel Image 1">
+                <img src="resources/wheelPic2.jpg" alt="Wheel Image 2">
+                <p><strong>Tech Stack:</strong> Python, C++, Arduino, CAD</p>
+                <a target="_blank" href="#" style="color: #ffcc00;">View Live</a> | <a target="_blank" href="https://github.com/ANGELOREYES-afk/FFBwheelACtelemtry" style="color: #ffcc00;">GitHub</a>
             </div>
         `;
         
