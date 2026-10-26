@@ -4,4 +4,4 @@ Created using HTML, CSS, and JavaScript
 
 The website itself includes my resume, projects, and a bit more about myself.
 
-Feel free to check back for updates!
+Check back for updates!
